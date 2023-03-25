@@ -135,6 +135,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable $SAO
 sudo systemctl start $SAO
+rm -rf $HOME/SAOConsensus.sh
 
 echo -e "\e[1m\e[31mSETUP FINISHED\e[0m"
 echo ""
