@@ -1,6 +1,6 @@
 - Explorer : https://ojo.explorers.guru/validators
-- Snapshot : https://snap.node.seputar.codes/bb/
-- Snapshot File : https://snap.node.seputar.codes/bb/snapshot_latest.tar.lz4
+- Snapshot : https://snap.node.seputar.codes/ojo
+- Snapshot File : https://snap.node.seputar.codes/ojo/snapshot_latest.tar.lz4
 
 ________________________________________________
 
@@ -24,7 +24,7 @@ rm -rf $HOME/.ojo/data
 ```
 ### 2. Use our Snapshot
 ```
-curl -L  https://snap.node.seputar.codes/bb/snapshot_latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.ojo
+curl -L  https://snap.node.seputar.codes/ojo/snapshot_latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.ojo
 mv $HOME/.ojo/priv_validator_state.json.backup $HOME/.ojo/data/priv_validator_state.json
 ```
 ### 3. Start Node
