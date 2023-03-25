@@ -40,6 +40,7 @@ echo -e "\e[1m\e[32m1. Updating packages... \e[0m" && sleep 1
 sudo apt update && sudo apt list --upgradable && sudo apt upgrade -y
 
 echo -e "\e[1m\e[32m2. Installing dependencies... \e[0m" && sleep 1
+
 # packages
 sudo apt install curl build-essential git wget jq make gcc tmux chrony -y
 
@@ -63,54 +64,74 @@ git checkout v0.1.2
 # Build binaries
 cd $HOME/ojo && make build
 
-# config
+# Prepare binaries for Cosmovisor
+mkdir -p $HOME/.ojo/cosmovisor/genesis/bin
+mv build/ojod $HOME/.ojo/cosmovisor/genesis/bin/
+rm -rf build
+
+# Create application symlinks
+ln -s $HOME/.ojo/cosmovisor/genesis $HOME/.ojo/cosmovisor/current
+sudo ln -s $HOME/.ojo/cosmovisor/current/bin/ojod /usr/local/bin/ojod
+
+# Set node configuration
 ojod config chain-id ojo-devnet
 ojod config keyring-backend test
+ojod config node tcp://localhost:50657
 
-# init
+# Initialize the node
 ojod init $NODENAME --chain-id ojo-devnet
 
-# download genesis and addrbook
-rm ~/.ojo/config/genesis.json
-curl https://bonusblock-testnet.alter.network/genesis? | jq '.result.genesis' > ~/.ojo/config/genesis.json
+# Download genesis and addrbook
+curl -Ls https://snapshots.kjnodes.com/ojo-testnet/genesis.json > $HOME/.ojo/config/genesis.json
+curl -Ls https://snapshots.kjnodes.com/ojo-testnet/addrbook.json > $HOME/.ojo/config/addrbook.json
 
-# set peers and seeds
-PEERS="$(curl -sS https://rpc-bonusblock.sxlzptprjkt.xyz/net_info | jq -r '.result.peers[] | "\(.node_info.id)@\(.remote_ip):\(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|\n|,|g;s|.$||')"
-sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$PEERS\"|" $HOME/.ojo/config/config.toml
+# Add seeds
+sed -i -e "s|^seeds *=.*|seeds = \"3f472746f46493309650e5a033076689996c8881@ojo-testnet.rpc.kjnodes.com:50659\"|" $HOME/.ojo/config/config.toml
 
+# Set minimum gas price
+sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0uojo\"|" $HOME/.ojo/config/app.toml
 
-# config pruning
-pruning="custom"
-pruning_keep_recent="100"
-pruning_keep_every="0"
-pruning_interval="50"
-sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.ojo/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.ojo/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.ojo/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.ojo/config/app.toml
+# Set pruning
+sed -i \
+  -e 's|^pruning *=.*|pruning = "custom"|' \
+  -e 's|^pruning-keep-recent *=.*|pruning-keep-recent = "100"|' \
+  -e 's|^pruning-keep-every *=.*|pruning-keep-every = "0"|' \
+  -e 's|^pruning-interval *=.*|pruning-interval = "19"|' \
+  $HOME/.ojo/config/app.toml
 
-# set minimum gas price and timeout commit
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025ubonus\"/" $HOME/.ojo/config/app.toml
+# Set custom ports
+sed -i -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:50658\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:50657\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:50060\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:50656\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":50660\"%" $HOME/.ojo/config/config.toml
+sed -i -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:50317\"%; s%^address = \":8080\"%address = \":50080\"%; s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:50090\"%; s%^address = \"0.0.0.0:9091\"%address = \"0.0.0.0:50091\"%; s%^address = \"0.0.0.0:8545\"%address = \"0.0.0.0:50545\"%; s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:50546\"%" $HOME/.ojo/config/app.toml
 
 # enable prometheus
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.ojo/config/config.toml
 
+# Download latest chain snapshot
+curl -L https://snapshots.kjnodes.com/ojo-testnet/snapshot_latest.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.ojo
+[[ -f $HOME/.ojo/data/upgrade-info.json ]] && cp $HOME/.ojo/data/upgrade-info.json $HOME/.ojo/cosmovisor/genesis/upgrade-info.json
+
 # reset
-
-
 echo -e "\e[1m\e[32m4. Starting service... \e[0m" && sleep 1
 # create service
-sudo tee /etc/systemd/system/ojod.service > /dev/null <<EOF
+# Download and install Cosmovisor
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+
+# Create service
+sudo tee /etc/systemd/system/ojod.service > /dev/null << EOF
 [Unit]
-Description=bonus
+Description=ojo-testnet node service
 After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which ojod) start --home $HOME/.ojo
+ExecStart=$(which cosmovisor) run start
 Restart=on-failure
-RestartSec=3
+RestartSec=10
 LimitNOFILE=65535
+Environment="DAEMON_HOME=$HOME/.ojo"
+Environment="DAEMON_NAME=ojod"
+Environment="UNSAFE_SKIP_BACKUP=true"
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.ojo/cosmovisor/current/bin"
 
 [Install]
 WantedBy=multi-user.target
@@ -120,8 +141,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable ojod
 sudo systemctl restart ojod
-rm -rf $HOME/bonusblock.sh
+rm -rf $HOME/ojo.sh
 source $HOME/.bash_profile
 sudo journalctl -fu ojod -o cat
-
 echo '=============== SETUP FINISHED ==================='
