@@ -112,7 +112,7 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0001$SAO_DENOM\"/
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = \"2000\"/" $HOME/$SAO_FOLDER/config/app.toml
 sed -i -e "s/^snapshot-keep-recent *=.*/snapshot-keep-recent = \"5\"/" $HOME/$SAO_FOLDER/config/app.toml
 $SAO tendermint unsafe-reset-all --home $HOME/$SAO_FOLDER --keep-addr-book
-curl -L http://snapcrot.hexskrt.net/sao/sao.latest.tar.lz4 | tar -Ilz4 -xf - -C $HOME/$SAO_FOLDER
+curl -L https://snap.node.seputar.codes/sao/snapshot_latest.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.sao
 
 # Create Service
 sudo tee /etc/systemd/system/$SAO.service > /dev/null <<EOF
