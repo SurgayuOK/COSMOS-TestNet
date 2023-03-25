@@ -81,7 +81,7 @@ ojod query bank balances $OJO_WALLET_ADDRESS
 ### Membuat validator
 ```
 ojod tx staking create-validator \
-  --amount 100000uOJO \
+  --amount 100000uojo \
   --from $WALLET \
   --commission-max-change-rate "0.01" \
   --commission-max-rate "0.2" \
@@ -94,7 +94,7 @@ ojod tx staking create-validator \
   --moniker $NODENAME \
   --gas=auto \
   --gas-adjustment=1.2 \
-  --gas-prices=0.025uOJO \
+  --gas-prices=0.025uojo \
   --chain-id $OJO_CHAIN_ID
 ```
 ### Edit validator
@@ -106,7 +106,7 @@ ojod tx staking edit-validator \
   --details="<your_validator_description>" \
   --chain-id=$OJO_CHAIN_ID \
   --gas=auto \
-  --fees=260000000uOJO \
+  --fees=260000000uojo \
   --gas-adjustment=1.2 \
   --from=$WALLET
 ```
@@ -116,26 +116,26 @@ ojod tx slashing unjail \
   --broadcast-mode=block \
   --from=$WALLET \
   --chain-id=$OJO_CHAIN_ID \
-  --fees=200000000uOJO \
+  --fees=200000000uojo \
   --gas-adjustment=1.2 \
   --gas=auto
 ```
 ### Voting
 ```
-ojod tx gov vote 1 yes --from $WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uOJO
+ojod tx gov vote 1 yes --from $WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uojo
 ```
 ## Delegasi dan Rewards
 ### Delegasi
 ```
-ojod tx staking delegate $OJO_VALOPER_ADDRESS 1000000000000uOJO --from=$WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=250000uOJO
+ojod tx staking delegate $OJO_VALOPER_ADDRESS 1000000000000uojo --from=$WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=250000uojo
 ```
 ### Withdraw reward
 ```
-ojod tx distribution withdraw-all-rewards --from=$WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uOJO
+ojod tx distribution withdraw-all-rewards --from=$WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uojo
 ```
 ### Withdraw reward beserta komisi
 ```
-ojod tx distribution withdraw-rewards $OJO_VALOPER_ADDRESS --from=$WALLET --commission --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uOJO
+ojod tx distribution withdraw-rewards $OJO_VALOPER_ADDRESS --from=$WALLET --commission --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uojo
 ```
 ## Hapus node
 ```
