@@ -55,8 +55,8 @@ saod keys list
 ```
 ### Simpan informasi wallet
 ```
-SAO_WALLET_ADDRESS=$(SAOd keys show $WALLET -a)
-SAO_VALOPER_ADDRESS=$(SAOd keys show $WALLET --bech val -a)
+SAO_WALLET_ADDRESS=$(saod keys show $WALLET -a)
+SAO_VALOPER_ADDRESS=$(saod keys show $WALLET --bech val -a)
 echo 'export SAO_WALLET_ADDRESS='${SAO_WALLET_ADDRESS} >> $HOME/.bash_profile
 echo 'export SAO_VALOPER_ADDRESS='${SAO_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
@@ -85,7 +85,7 @@ ________________________________________________
 ## Membuat validator
 ### Check balance
 ```
-saod query bank balances $sao_WALLET_ADDRESS
+saod query bank balances $SAO_WALLET_ADDRESS
 ```
 ### Membuat validator
 ```
