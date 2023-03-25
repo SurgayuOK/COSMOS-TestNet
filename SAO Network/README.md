@@ -5,7 +5,7 @@
 - Twitter SAO : https://twitter.com/SAONetwork
 - Discord SAO : https://discord.gg/Q6TxBYrydz
 - Docs SAO : https://docs.sao.network
-- Github SAO : -
+- Github SAO : https://github.com/SAONetwork/sao-node
 - SAO Explorer : https://sao.explorers.guru/validators
 - Our Snapshot : https://snap.node.seputar.codes/sao
 - Our Snapshot File : https://snap.node.seputar.codes/sao/snapshot_latest.tar.lz4
