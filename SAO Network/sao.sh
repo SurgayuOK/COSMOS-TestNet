@@ -71,7 +71,7 @@ ln -s $HOME/.sao/cosmovisor/genesis $HOME/.sao/cosmovisor/current
 sudo ln -s $HOME/.sao/cosmovisor/current/bin/saod /usr/local/bin/saod
 
 # Set node configuration
-saod init sao-testnet --chain-id=sao-testnet1
+saod init sao-testnet --chain-id=sao-test-1
 saod config keyring-backend test
 saod config node tcp://localhost:50657
 
