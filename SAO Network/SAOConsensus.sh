@@ -1,3 +1,19 @@
+#!/bin/bash
+clear
+merah="\e[31m"
+kuning="\e[33m"
+hijau="\e[32m"
+biru="\e[34m"
+UL="\e[4m"
+bold="\e[1m"
+italic="\e[3m"
+reset="\e[m"
+
+# logo
+
+curl -s https://raw.githubusercontent.com/SaujanaOK/Node-TestNet-Guide/main/logo.sh | bash
+sleep 2
+
 # Variable
 SAO_WALLET=wallet
 SAO=saod
@@ -5,8 +21,8 @@ SAO_ID=sao-testnet1
 SAO_FOLDER=.sao
 SAO_VER=v0.1.3
 SAO_REPO=https://github.com/SaoNetwork/sao-consensus
-SAO_GENESIS=https://raw.githubusercontent.com/sxlzptprjkt/resource/master/testnet/sao/genesis.json
-SAO_ADDRBOOK=https://raw.githubusercontent.com/sxlzptprjkt/resource/master/testnet/sao/addrbook.json
+SAO_GENESIS=https://raw.githubusercontent.com/SaujanaOK/COSMOS-TestNet/main/SAO%20Network/genesis.json
+SAO_ADDRBOOK=https://raw.githubusercontent.com/SaujanaOK/COSMOS-TestNet/main/SAO%20Network/addrbook.json
 SAO_DENOM=sao
 SAO_PORT=27
 
