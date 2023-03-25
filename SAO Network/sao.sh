@@ -57,7 +57,8 @@ go version
 echo -e "\e[1m\e[32m3. Downloading and building binaries... \e[0m" && sleep 1
 # download binary
 cd $HOME
-git clone https://github.com/SaoNetwork/sao-consensus.git && mv sao-consensus sao
+git clone https://github.com/SaoNetwork/sao-consensus.git
+mv sao-consensus sao
 cd $HOME/sao && git checkout testnet1
 cd $HOME/sao && make build
 cd $HOME/sao && which saod
