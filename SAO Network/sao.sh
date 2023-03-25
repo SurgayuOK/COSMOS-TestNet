@@ -64,7 +64,7 @@ cd $HOME/sao && which saod
 
 # Prepare binaries for Cosmovisor
 mkdir -p $HOME/.sao/cosmovisor/genesis/bin
-mv build/linux/saod $HOME/.ojo/cosmovisor/genesis/bin/
+mv build/linux/saod $HOME/.sao/cosmovisor/genesis/bin/
 cd $HOME/sao && rm -rf build
 
 # Create application symlinks
