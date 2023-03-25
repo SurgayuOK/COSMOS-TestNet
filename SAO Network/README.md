@@ -14,7 +14,7 @@ ________________________________________________
 
 ## Auto install
 ```
-wget -O sao.sh https://raw.githubusercontent.com/SaujanaOK/COSMOS-TestNet/main/sao/sao.sh && chmod +x sao.sh && ./sao.sh
+wget -O sao.sh https://raw.githubusercontent.com/SaujanaOK/COSMOS-TestNet/main/SAO%20Network/sao.sh && chmod +x sao.sh && ./sao.sh
 ```
 
 ### Pasca install
