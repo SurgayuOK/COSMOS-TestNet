@@ -56,10 +56,10 @@ saod keys list
 ```
 ### Simpan informasi wallet
 ```
-sao_WALLET_ADDRESS=$(saod keys show $WALLET -a)
-sao_VALOPER_ADDRESS=$(saod keys show $WALLET --bech val -a)
-echo 'export sao_WALLET_ADDRESS='${sao_WALLET_ADDRESS} >> $HOME/.bash_profile
-echo 'export sao_VALOPER_ADDRESS='${sao_VALOPER_ADDRESS} >> $HOME/.bash_profile
+SAO_WALLET_ADDRESS=$(SAOd keys show $WALLET -a)
+SAO_VALOPER_ADDRESS=$(SAOd keys show $WALLET --bech val -a)
+echo 'export SAO_WALLET_ADDRESS='${SAO_WALLET_ADDRESS} >> $HOME/.bash_profile
+echo 'export SAO_VALOPER_ADDRESS='${SAO_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 ### Check Sync
