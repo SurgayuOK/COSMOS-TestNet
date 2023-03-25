@@ -37,7 +37,11 @@ mv $HOME/.sao/priv_validator_state.json.backup $HOME/.sao/data/priv_validator_st
 ```
 ### 3. Start Node
 ```
-sudo systemctl restart saod && sudo journalctl -u saod -f --no-hostname -o cat
+sudo systemctl restart saod
+```
+### 4. Check Logs
+```
+sudo journalctl -u saod -f --no-hostname -o cat
 ```
 ________________________________________________
 ## Informasi node
