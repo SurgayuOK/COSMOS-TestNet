@@ -73,10 +73,15 @@ sudo ln -s $HOME/.sao/cosmovisor/current/bin/saod /usr/local/bin/saod
 # Set node configuration
 saod init sao-testnet --chain-id=sao-test-1
 saod config keyring-backend test
+cd ~/.sao/config
+wget https://raw.githubusercontent.com/SAONetwork/sao-consensus/testnet0/network/testnet0/config/app.toml -O app.toml
+wget https://raw.githubusercontent.com/SAONetwork/sao-consensus/testnet0/network/testnet0/config/client.toml -O client.toml
+wget https://raw.githubusercontent.com/SAONetwork/sao-consensus/testnet0/network/testnet0/config/config.toml -O config.toml
+wget https://raw.githubusercontent.com/SAONetwork/sao-consensus/testnet0/network/testnet0/config/genesis.json -O genesis.json
 saod config node tcp://localhost:50657
 
 # Initialize the node
-saod init $NODENAME --chain-id sao-devnet
+saod init $NODENAME --chain-id sao-test-1
 
 # Download genesis and addrbook
 curl -Ls https://snapshots.kjnodes.com/sao-testnet/genesis.json > $HOME/.sao/config/genesis.json
