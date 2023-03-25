@@ -76,12 +76,12 @@ ________________________________________________
 ## Membuat validator
 ### Check balance
 ```
-ojod query bank balances $BONUS_WALLET_ADDRESS
+ojod query bank balances $OJO_WALLET_ADDRESS
 ```
 ### Membuat validator
 ```
 ojod tx staking create-validator \
-  --amount 100000ubonus \
+  --amount 100000uOJO \
   --from $WALLET \
   --commission-max-change-rate "0.01" \
   --commission-max-rate "0.2" \
@@ -94,8 +94,8 @@ ojod tx staking create-validator \
   --moniker $NODENAME \
   --gas=auto \
   --gas-adjustment=1.2 \
-  --gas-prices=0.025ubonus \
-  --chain-id $BONUS_CHAIN_ID
+  --gas-prices=0.025uOJO \
+  --chain-id $OJO_CHAIN_ID
 ```
 ### Edit validator
 ```
@@ -104,9 +104,9 @@ ojod tx staking edit-validator \
   --identity="<your_keybase_id>" \
   --website="<your_website>" \
   --details="<your_validator_description>" \
-  --chain-id=$BONUS_CHAIN_ID \
+  --chain-id=$OJO_CHAIN_ID \
   --gas=auto \
-  --fees=260000000ubonus \
+  --fees=260000000uOJO \
   --gas-adjustment=1.2 \
   --from=$WALLET
 ```
@@ -115,27 +115,27 @@ ojod tx staking edit-validator \
 ojod tx slashing unjail \
   --broadcast-mode=block \
   --from=$WALLET \
-  --chain-id=$BONUS_CHAIN_ID \
-  --fees=200000000ubonus \
+  --chain-id=$OJO_CHAIN_ID \
+  --fees=200000000uOJO \
   --gas-adjustment=1.2 \
   --gas=auto
 ```
 ### Voting
 ```
-ojod tx gov vote 1 yes --from $WALLET --chain-id=$BONUS_CHAIN_ID --gas=auto --fees=2500000ubonus
+ojod tx gov vote 1 yes --from $WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uOJO
 ```
 ## Delegasi dan Rewards
 ### Delegasi
 ```
-ojod tx staking delegate $BONUS_VALOPER_ADDRESS 1000000000000ubonus --from=$WALLET --chain-id=$BONUS_CHAIN_ID --gas=auto --fees=250000ubonus
+ojod tx staking delegate $OJO_VALOPER_ADDRESS 1000000000000uOJO --from=$WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=250000uOJO
 ```
 ### Withdraw reward
 ```
-ojod tx distribution withdraw-all-rewards --from=$WALLET --chain-id=$BONUS_CHAIN_ID --gas=auto --fees=2500000ubonus
+ojod tx distribution withdraw-all-rewards --from=$WALLET --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uOJO
 ```
 ### Withdraw reward beserta komisi
 ```
-ojod tx distribution withdraw-rewards $BONUS_VALOPER_ADDRESS --from=$WALLET --commission --chain-id=$BONUS_CHAIN_ID --gas=auto --fees=2500000ubonus
+ojod tx distribution withdraw-rewards $OJO_VALOPER_ADDRESS --from=$WALLET --commission --chain-id=$OJO_CHAIN_ID --gas=auto --fees=2500000uOJO
 ```
 ## Hapus node
 ```
@@ -144,11 +144,8 @@ sudo systemctl disable ojod && \
 rm -rf /etc/systemd/system/ojod.service && \
 sudo systemctl daemon-reload && \
 cd $HOME && \
-rm -rf BonusBlock-chain && \
-rm -rf bonus.sh && \
+rm -rf ojo && \
+rm -rf ojo.sh && \
 rm -rf .ojo && \
 rm -rf $(which ojod)
 ```
-
-
-
