@@ -94,61 +94,68 @@ saod query bank balances $SAO_WALLET_ADDRESS
 ### Membuat validator
 ```
 saod tx staking create-validator \
-  --amount 100000usao \
-  --from $WALLET \
-  --commission-max-change-rate "0.01" \
-  --commission-max-rate "0.2" \
-  --identity="<your_keybase_id>" \
-  --website="<your_website>" \
-  --details="<your_validator_description>" \
-  --commission-rate "0.07" \
-  --min-self-delegation "1" \
-  --pubkey  $(saod tendermint show-validator) \
-  --moniker $NODENAME \
-  --gas=auto \
-  --gas-adjustment=1.2 \
-  --gas-prices=0.025usao \
-  --chain-id $sao_CHAIN_ID
+--amount=1000000sao \
+--pubkey=$(saod tendermint show-validator) \
+--moniker="YOUR_MONIKER_NAME" \
+--identity="YOUR_KEYBASE_ID" \
+--details="YOUR_DETAILS" \
+--website="YOUR_WEBSITE_URL" \
+--chain-id=sao-testnet1 \
+--commission-rate=0.10 \
+--commission-max-rate=0.20 \
+--commission-max-change-rate=0.01 \
+--min-self-delegation=1 \
+--from=wallet \
+--fees=550sao
 ```
 ### Edit validator
 ```
 saod tx staking edit-validator \
-  --new-moniker="nama-node" \
-  --identity="<your_keybase_id>" \
-  --website="<your_website>" \
-  --details="<your_validator_description>" \
-  --chain-id=$sao_CHAIN_ID \
-  --gas=auto \
-  --fees=260000000usao \
-  --gas-adjustment=1.2 \
-  --from=$WALLET
+--new-moniker="YOUR_MONIKER_NAME" \
+--identity="YOUR_KEYBASE_ID" \
+--details="YOUR_DETAILS" \
+--website="YOUR_WEBSITE_URL"
+--chain-id=sao-testnet1 \
+--commission-rate=0.05 \
+--from=wallet \
+--fees=550sao
 ```
 ### Unjail validator
 ```
-saod tx slashing unjail \
-  --broadcast-mode=block \
-  --from=$WALLET \
-  --chain-id=$sao_CHAIN_ID \
-  --fees=200000000usao \
-  --gas-adjustment=1.2 \
-  --gas=auto
+saod tx slashing unjail --broadcast-mode=block --from wallet --chain-id sao-testnet1 --fees=550sao
 ```
 ### Voting
 ```
-saod tx gov vote 1 yes --from $WALLET --chain-id=$sao_CHAIN_ID --gas=auto --fees=2500000usao
+saod tx gov vote 1 yes --from wallet --chain-id sao-testnet1 --fees=550sao
 ```
 ## Delegasi dan Rewards
-### Delegasi
+### Delegate to yourself
 ```
-saod tx staking delegate $sao_VALOPER_ADDRESS 1000000000000usao --from=$WALLET --chain-id=$sao_CHAIN_ID --gas=auto --fees=250000usao
+saod tx staking delegate $(saod keys show wallet --bech val -a) 1000000sao --from wallet --chain-id sao-testnet1 --fees=550sao
 ```
-### Withdraw reward
+### Delegate tokens to validator
 ```
-saod tx distribution withdraw-all-rewards --from=$WALLET --chain-id=$sao_CHAIN_ID --gas=auto --fees=2500000usao
+saod tx staking delegate <TO_VALOPER_ADDRESS> 1000000sao --from wallet --chain-id sao-testnet1 --fees=550sao
+```
+### Redelegate tokens to another validator
+```
+saod tx staking redelegate $(saod keys show wallet --bech val -a) <TO_VALOPER_ADDRESS> 1000000sao --from wallet --chain-id sao-testnet1 --fees=550sao
+```
+### Unbond tokens from your validator
+```
+saod tx staking unbond $(saod keys show wallet --bech val -a) 1000000sao --from wallet --chain-id sao-testnet1 --fees=550sao
+```
+### Send tokens to the wallet
+```
+saod tx bank send wallet <TO_WALLET_ADDRESS> 1000000sao --from wallet --chain-id sao-testnet1 --fees=550sao
+```
+### Withdraw all reward
+```
+saod tx distribution withdraw-all-rewards --from wallet --chain-id sao-testnet1 --fees=550sao
 ```
 ### Withdraw reward beserta komisi
 ```
-saod tx distribution withdraw-rewards $sao_VALOPER_ADDRESS --from=$WALLET --commission --chain-id=$sao_CHAIN_ID --gas=auto --fees=2500000usao
+saod tx distribution withdraw-rewards $(saod keys show wallet --bech val -a) --commission --from wallet --chain-id sao-testnet1 --fees=550sao
 ```
 ## Hapus node
 ```
@@ -157,8 +164,7 @@ sudo systemctl disable saod && \
 rm -rf /etc/systemd/system/saod.service && \
 sudo systemctl daemon-reload && \
 cd $HOME && \
-rm -rf sao && \
-rm -rf sao.sh && \
+rm -rf sao-consensus && \
 rm -rf .sao && \
 rm -rf $(which saod)
 ```
