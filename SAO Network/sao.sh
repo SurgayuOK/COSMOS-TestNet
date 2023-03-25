@@ -59,12 +59,13 @@ echo -e "\e[1m\e[32m3. Downloading and building binaries... \e[0m" && sleep 1
 cd $HOME
 git clone https://github.com/SaoNetwork/sao-consensus.git && mv sao-consensus sao
 cd $HOME/sao && git checkout testnet1
-cd $HOME/sao && make 
+cd $HOME/sao && make build
 cd $HOME/sao && which saod
 
 # Prepare binaries for Cosmovisor
 mkdir -p $HOME/.sao/cosmovisor/genesis/bin
-mv /root/go/bin/saod $HOME/.sao/cosmovisor/genesis/bin/
+mv build/linux/saod $HOME/.ojo/cosmovisor/genesis/bin/
+cd $HOME/sao && rm -rf build
 
 # Create application symlinks
 ln -s $HOME/.sao/cosmovisor/genesis $HOME/.sao/cosmovisor/current
@@ -107,10 +108,6 @@ sed -i -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:50317\"
 
 # enable prometheus
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.sao/config/config.toml
-
-# Download latest chain snapshot
-curl -L https://snapshots.kjnodes.com/sao-testnet/snapshot_latest.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.sao
-[[ -f $HOME/.sao/data/upgrade-info.json ]] && cp $HOME/.sao/data/upgrade-info.json $HOME/.sao/cosmovisor/genesis/upgrade-info.json
 
 # reset
 echo -e "\e[1m\e[32m4. Starting service... \e[0m" && sleep 1
