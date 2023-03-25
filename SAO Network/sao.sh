@@ -74,6 +74,8 @@ sudo ln -s $HOME/.sao/cosmovisor/current/bin/saod /usr/local/bin/saod
 # Set node configuration
 saod init sao-testnet --chain-id=sao-test-1
 saod config keyring-backend test
+
+# Set Config
 cd ~/.sao/config
 wget https://raw.githubusercontent.com/SAONetwork/sao-consensus/testnet0/network/testnet0/config/app.toml -O app.toml
 wget https://raw.githubusercontent.com/SAONetwork/sao-consensus/testnet0/network/testnet0/config/client.toml -O client.toml
@@ -83,13 +85,6 @@ saod config node tcp://localhost:50657
 
 # Initialize the node
 saod init $NODENAME --chain-id sao-test-1
-
-# Download genesis and addrbook
-curl -Ls https://snapshots.kjnodes.com/sao-testnet/genesis.json > $HOME/.sao/config/genesis.json
-curl -Ls https://snapshots.kjnodes.com/sao-testnet/addrbook.json > $HOME/.sao/config/addrbook.json
-
-# Add seeds
-sed -i -e "s|^seeds *=.*|seeds = \"3f472746f46493309650e5a033076689996c8881@sao-testnet.rpc.kjnodes.com:50659\"|" $HOME/.sao/config/config.toml
 
 # Set minimum gas price
 sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0usao\"|" $HOME/.sao/config/app.toml
