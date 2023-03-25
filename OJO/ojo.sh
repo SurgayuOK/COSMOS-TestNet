@@ -64,19 +64,19 @@ git checkout v0.1.2
 cd $HOME/ojo && make build
 
 # config
-bonus-blockd config chain-id blocktopia-01
-bonus-blockd config keyring-backend test
+ojod config chain-id ojo-devnet
+ojod config keyring-backend test
 
 # init
-bonus-blockd init $NODENAME --chain-id blocktopia-01
+ojod init $NODENAME --chain-id ojo-devnet
 
 # download genesis and addrbook
-rm ~/.bonusblock/config/genesis.json
-curl https://bonusblock-testnet.alter.network/genesis? | jq '.result.genesis' > ~/.bonusblock/config/genesis.json
+rm ~/.ojo/config/genesis.json
+curl https://bonusblock-testnet.alter.network/genesis? | jq '.result.genesis' > ~/.ojo/config/genesis.json
 
 # set peers and seeds
 PEERS="$(curl -sS https://rpc-bonusblock.sxlzptprjkt.xyz/net_info | jq -r '.result.peers[] | "\(.node_info.id)@\(.remote_ip):\(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|\n|,|g;s|.$||')"
-sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$PEERS\"|" $HOME/.bonusblock/config/config.toml
+sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$PEERS\"|" $HOME/.ojo/config/config.toml
 
 
 # config pruning
@@ -84,30 +84,30 @@ pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
 pruning_interval="50"
-sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.bonusblock/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.bonusblock/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.bonusblock/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.bonusblock/config/app.toml
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.ojo/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.ojo/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.ojo/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.ojo/config/app.toml
 
 # set minimum gas price and timeout commit
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025ubonus\"/" $HOME/.bonusblock/config/app.toml
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025ubonus\"/" $HOME/.ojo/config/app.toml
 
 # enable prometheus
-sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.bonusblock/config/config.toml
+sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.ojo/config/config.toml
 
 # reset
 
 
 echo -e "\e[1m\e[32m4. Starting service... \e[0m" && sleep 1
 # create service
-sudo tee /etc/systemd/system/bonus-blockd.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/ojod.service > /dev/null <<EOF
 [Unit]
 Description=bonus
 After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which bonus-blockd) start --home $HOME/.bonusblock
+ExecStart=$(which ojod) start --home $HOME/.ojo
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -118,10 +118,10 @@ EOF
 
 # start service
 sudo systemctl daemon-reload
-sudo systemctl enable bonus-blockd
-sudo systemctl restart bonus-blockd
+sudo systemctl enable ojod
+sudo systemctl restart ojod
 rm -rf $HOME/bonusblock.sh
 source $HOME/.bash_profile
-sudo journalctl -fu bonus-blockd -o cat
+sudo journalctl -fu ojod -o cat
 
 echo '=============== SETUP FINISHED ==================='
