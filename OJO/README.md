@@ -1,6 +1,11 @@
-- Explorer : https://ojo.explorers.guru/validators
-- Snapshot : https://snap.node.seputar.codes/ojo
-- Snapshot File : https://snap.node.seputar.codes/ojo/snapshot_latest.tar.lz4
+- OJO Faucet : 
+- Twitter Official :
+- Discord Official :
+- Docs Official :
+- Github Official : 
+- Ojo Explorer : https://ojo.explorers.guru/validators
+- Our Snapshot : https://snap.node.seputar.codes/ojo
+- Our Snapshot File : https://snap.node.seputar.codes/ojo/snapshot_latest.tar.lz4
 
 ________________________________________________
 
