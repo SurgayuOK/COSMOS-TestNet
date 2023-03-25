@@ -1,13 +1,13 @@
-- Registrasi Incentive Testnet : [Google Form](https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIx9mxry0w5oTyiOpSHg04cM4GPZMKvxd1LmhqyhYvqY8bOQ/alreadyresponded)
-- OJO Faucet : 
-- Twitter Official :
-- Discord Official : https://discord.gg/Q6TxBYrydz
-- Docs Official :
-- Github Official : 
-- Ojo Explorer : https://sao.explorers.guru/validators
+- Registrasi Incentive Testnet SAO : [Google Form](https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIx9mxry0w5oTyiOpSHg04cM4GPZMKvxd1LmhqyhYvqY8bOQ/alreadyresponded)
+- SAO Faucet : https://faucet.testnet.sao.network/
+- Twitter SAO : https://twitter.com/SAONetwork
+- Discord SAO : https://discord.gg/Q6TxBYrydz
+- Docs SAO : https://docs.sao.network
+- Github SAO : -
+- SAO Explorer : https://sao.explorers.guru/validators
 - Our Snapshot : https://snap.node.seputar.codes/sao
 - Our Snapshot File : https://snap.node.seputar.codes/sao/snapshot_latest.tar.lz4
-- Detile Information : [Medium](https://saonetwork.medium.com/a-complete-guide-to-sao-network-testnet-e70117bd294)
+- SAO Information : [Medium](https://saonetwork.medium.com/a-complete-guide-to-sao-network-testnet-e70117bd294)
 ________________________________________________
 
 ## Auto install
