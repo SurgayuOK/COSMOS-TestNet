@@ -1,4 +1,3 @@
-# GUIDE SEDANG RUSAK
 # SAO NETWORK
 - Incentive Status : CONFIRMED
 - Registrasi Incentive Testnet SAO : [Google Form](https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIx9mxry0w5oTyiOpSHg04cM4GPZMKvxd1LmhqyhYvqY8bOQ/alreadyresponded)
@@ -15,7 +14,7 @@ ________________________________________________
 
 ## Auto install
 ```
-wget -O sao.sh https://raw.githubusercontent.com/SaujanaOK/COSMOS-TestNet/main/SAO%20Network/sao.sh && chmod +x sao.sh && ./sao.sh
+wget -O SAOConsensus.sh https://raw.githubusercontent.com/SaujanaOK/COSMOS-TestNet/main/SAO%20Network/SAOConsensus.sh && chmod +x SAOConsensus.sh && ./SAOConsensus.sh
 ```
 
 ### Pasca install
