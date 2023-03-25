@@ -46,10 +46,10 @@ ojod keys list
 ```
 ### Simpan informasi wallet
 ```
-BONUS_WALLET_ADDRESS=$(ojod keys show $WALLET -a)
-BONUS_VALOPER_ADDRESS=$(ojod keys show $WALLET --bech val -a)
-echo 'export BONUS_WALLET_ADDRESS='${BONUS_WALLET_ADDRESS} >> $HOME/.bash_profile
-echo 'export BONUS_VALOPER_ADDRESS='${BONUS_VALOPER_ADDRESS} >> $HOME/.bash_profile
+OJO_WALLET_ADDRESS=$(ojod keys show $WALLET -a)
+OJO_VALOPER_ADDRESS=$(ojod keys show $WALLET --bech val -a)
+echo 'export OJO_WALLET_ADDRESS='${OJO_WALLET_ADDRESS} >> $HOME/.bash_profile
+echo 'export OJO_VALOPER_ADDRESS='${OJO_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 ### Check Sync
