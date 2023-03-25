@@ -1,3 +1,5 @@
+# SAO NETWORK
+- Incentive Status : CONFIRMED
 - Registrasi Incentive Testnet SAO : [Google Form](https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIx9mxry0w5oTyiOpSHg04cM4GPZMKvxd1LmhqyhYvqY8bOQ/alreadyresponded)
 - SAO Faucet : https://faucet.testnet.sao.network/
 - Twitter SAO : https://twitter.com/SAONetwork
