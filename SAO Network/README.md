@@ -1,12 +1,12 @@
 - Registrasi Incentive Testnet : [Google Form](https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIx9mxry0w5oTyiOpSHg04cM4GPZMKvxd1LmhqyhYvqY8bOQ/alreadyresponded)
 - OJO Faucet : 
 - Twitter Official :
-- Discord Official : https://discord.gg/exSfjHM9fH
+- Discord Official : https://discord.gg/Q6TxBYrydz
 - Docs Official :
 - Github Official : 
-- Ojo Explorer : https://ojo.explorers.guru/validators
-- Our Snapshot : https://snap.node.seputar.codes/ojo
-- Our Snapshot File : https://snap.node.seputar.codes/ojo/snapshot_latest.tar.lz4
+- Ojo Explorer : https://sao.explorers.guru/validators
+- Our Snapshot : https://snap.node.seputar.codes/sao
+- Our Snapshot File : https://snap.node.seputar.codes/sao/snapshot_latest.tar.lz4
 - Detile Information : [Medium](https://saonetwork.medium.com/a-complete-guide-to-sao-network-testnet-e70117bd294)
 ________________________________________________
 
