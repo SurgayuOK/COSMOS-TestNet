@@ -1,3 +1,4 @@
+- Explorer : https://ojo.explorers.guru/validators
 - Snapshot : https://snap.node.seputar.codes/bb/
 - Snapshot File : https://snap.node.seputar.codes/bb/snapshot_latest.tar.lz4
 
